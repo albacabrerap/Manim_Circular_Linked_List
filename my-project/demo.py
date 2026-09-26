@@ -88,14 +88,14 @@ class CircularLinkedListDemo(Scene):
 
         self.play(FadeIn(first), FadeIn(node1_s1))
         self.wait(1.5)
-        self.play(Create(group_s1), FadeIn(lbl_s1), Create(loop_s1))
+        self.play(ReplacementTransform(node1_s1,group_s1), FadeIn(lbl_s1), Create(loop_s1))
         self.wait(1.5)
 
-        # segundo nodo (Inserción al inicio)
-        ins_note = Text("Al insertar al inicio, el nuevo nodo se vuelve la cabeza y apunta al anterior", font_size=18,
+        # segundo nodo
+        in_note = Text("Al insertar al inicio, el nuevo nodo se vuelve la cabeza y apunta al anterior", font_size=18,
                         color=GREEN)
-        ins_note.to_edge(DOWN)
-        self.play(FadeOut(first), FadeIn(ins_note))
+        in_note.to_edge(DOWN)
+        self.play(FadeOut(first), FadeIn(in_note))
         self.wait(1)
 
         node2_s2 = Square(side_length=0.8, fill_opacity=0.2).move_to(LEFT * 1.5)
@@ -128,12 +128,11 @@ class CircularLinkedListDemo(Scene):
             ReplacementTransform(group_s1, g1_s2),
             FadeOut(lbl_s1), FadeOut(loop_s1),
             Create(g2_s2), FadeIn(h_s2), FadeIn(t_s2),
-            GrowArrow(arr_21_s2), Create(circ_s2), run_time=3)
+            GrowArrow(arr_21_s2), Create(circ_s2), run_time=3.5)
         self.wait(2)
-
         # tercer nodo
         node1_s3 = Square(side_length=0.8, fill_opacity=0.2).move_to(LEFT * 2.5)
-        label1_s3 = Text("10", font_size=20).move_to(node1_s3.get_center())
+        label1_s3 = Text("30", font_size=20).move_to(node1_s3.get_center())
         g1_s3 = VGroup(node1_s3, label1_s3)
 
         node2_s3 = Square(side_length=0.8, fill_opacity=0.2).move_to(ORIGIN)
@@ -141,13 +140,16 @@ class CircularLinkedListDemo(Scene):
         g2_s3 = VGroup(node2_s3, label2_s3)
 
         node3_s3 = Square(side_length=0.8, fill_opacity=0.2).move_to(RIGHT * 2.5)
-        label3_s3 = Text("30", font_size=20).move_to(node3_s3.get_center())
+        label3_s3 = Text("10", font_size=20).move_to(node3_s3.get_center())
         g3_s3 = VGroup(node3_s3, label3_s3)
 
         h_s3 = Text("HEAD", font_size=16, color=YELLOW).next_to(g1_s3, UP, buff=0.3)
         t_s3 = Text("TAIL", font_size=16, color=YELLOW).next_to(g3_s3, UP, buff=0.3)
-        arr_12_s3 = Arrow(start=g1_s3.get_right(), end=g2_s3.get_left(), buff=0.1, color=GREEN, stroke_width=3, max_tip_length_to_length_ratio=0.3)
-        arr_23_s3 = Arrow(start=g2_s3.get_right(), end=g3_s3.get_left(), buff=0.1, color=GREEN, stroke_width=3, max_tip_length_to_length_ratio=0.3)
+
+        arr_12_s3 = Arrow(start=g1_s3.get_right(), end=g2_s3.get_left(), buff=0.1, color=GREEN, stroke_width=3,
+                          max_tip_length_to_length_ratio=0.3)
+        arr_23_s3 = Arrow(start=g2_s3.get_right(), end=g3_s3.get_left(), buff=0.1, color=GREEN, stroke_width=3,
+                          max_tip_length_to_length_ratio=0.3)
 
         r3_s3 = g3_s3.get_right()
         l1_s3 = g1_s3.get_left()
@@ -161,25 +163,24 @@ class CircularLinkedListDemo(Scene):
                   color=GREEN)
         )
 
-
         self.play(
-            ReplacementTransform(g1_s2, g1_s3),
+            Create(g1_s3),
             ReplacementTransform(g2_s2, g2_s3),
-            FadeOut(h_s2), FadeOut(t_s2), FadeOut(arr_21_s2), FadeOut(circ_s2),
-            Create(g3_s3), FadeIn(h_s3), FadeIn(t_s3),
-            GrowArrow(arr_12_s3), GrowArrow(arr_23_s3), Create(circ_s3), run_time=4.5
+            ReplacementTransform(g1_s2, g3_s3),
+            FadeOut(h_s2), FadeOut(t_s2), FadeOut(arr_21_s2), FadeOut(circ_s2), FadeOut(in_note),
+            FadeIn(h_s3), FadeIn(t_s3),
+            GrowArrow(arr_12_s3), GrowArrow(arr_23_s3), Create(circ_s3), run_time=5
         )
-        self.wait(2)
-        self.play(FadeOut(ins_note))
+        self.wait(2.1)
 
         # eliminar head
         del_note = Text("Eliminar al inicio: HEAD avanza, TAIL apunta al nuevo HEAD", font_size=18, color=RED)
         del_note.to_edge(DOWN)
         self.play(FadeIn(del_note))
-        self.wait(1.5)
+        self.wait(1.6)
 
         self.play(node1_s3.animate.set_color(RED))
-        self.wait(0.5)
+        self.wait(0.6)
 
         node2_s4 = Square(side_length=0.8, fill_opacity=0.2).move_to(LEFT * 1.5)
         label2_s4 = Text("20", font_size=20).move_to(node2_s4.get_center())
@@ -211,7 +212,7 @@ class CircularLinkedListDemo(Scene):
             ReplacementTransform(g3_s3, g3_s4),
             FadeOut(t_s3), FadeOut(arr_23_s3),
             FadeIn(h_s4), FadeIn(t_s4),
-            GrowArrow(arr_23_s4), Create(circ_s4), run_time=5
+            GrowArrow(arr_23_s4), Create(circ_s4), run_time=5.2
         )
         self.wait(2.5)
 
@@ -219,11 +220,11 @@ class CircularLinkedListDemo(Scene):
             FadeOut(g2_s4), FadeOut(g3_s4), FadeOut(h_s4), FadeOut(t_s4),
             FadeOut(arr_23_s4), FadeOut(circ_s4), FadeOut(op_title), FadeOut(del_note)
         )
-        self.wait(1)
+        self.wait(1.1)
 
         limit_text1 = Text("¿Para retroceder, eliminar al final o insertar en medio?", font_size=22, color=YELLOW)
         self.play(Write(limit_text1))
-        self.wait(2)
+        self.wait(2.1)
         self.play(limit_text1.animate.shift(DOWN))
 
         n_demo1 = Square(side_length=0.8, fill_opacity=0.2).shift(LEFT * 2)
@@ -276,9 +277,9 @@ class CircularLinkedListDemo(Scene):
         dg1_s1 = VGroup(dn1_s1, dnl1_s1)
         dlbl_s1 = Text("HEAD/TAIL", font_size=14, color=YELLOW).next_to(dg1_s1, UP, buff=0.3)
 
-        d_loop_f = CurvedArrow(dn1_s1.get_top() + LEFT * 0.15, dn1_s1.get_top() + RIGHT * 0.15, angle=-TAU,
+        d_loop_f = CurvedArrow(dn1_s1.get_top() + LEFT * 0.15, dn1_s1.get_top() + RIGHT * 0.15, angle=-TAU/1.2,
                                color=GREEN)
-        d_loop_b = CurvedArrow(dn1_s1.get_bottom() + RIGHT * 0.15, dn1_s1.get_bottom() + LEFT * 0.15, angle=-TAU,
+        d_loop_b = CurvedArrow(dn1_s1.get_bottom() + RIGHT * 0.15, dn1_s1.get_bottom() + LEFT * 0.15, angle=-TAU/1.2,
                                color=RED)
 
         self.play(Write(first),Create(dg1_s1), FadeIn(dlbl_s1), Create(d_loop_f), Create(d_loop_b), runtime=5)
@@ -483,26 +484,26 @@ class CircularLinkedListDemo(Scene):
         # Left Column: Circular Singly Summary
         s_box = Square(side_length=0.5, color=YELLOW_B, fill_opacity=0.2)
         s_text = Text("CS", font_size=14).move_to(s_box.get_center())
-        s_mini = VGroup(s_box, s_text).to_edge(LEFT*1.7, buff=1.5).shift(UP * 1.5)
+        s_mini = VGroup(s_box, s_text).to_edge(LEFT*3, buff=1.5).shift(UP * 1.5)
 
         s_desc = VGroup(
             Text("• Circular Singly", font_size=18, color=GREEN),
             Text("Ins./Elim. (pos. conocida): O(1)", font_size=14),
             Text("Búsqueda / Recorrido: O(n)", font_size=14),
             Text("Solo dirección siguiente", font_size=14, color=GRAY)
-        ).arrange(DOWN, aligned_edge=LEFT*1.7, buff=0.15).next_to(s_mini, DOWN, buff=0.3)
+        ).arrange(DOWN, aligned_edge=LEFT*3, buff=0.15).next_to(s_mini, DOWN, buff=0.3)
 
         # Right Column: Circular Doubly Summary
         d_box = Square(side_length=0.5, color=YELLOW_B,fill_opacity=0.2)
         d_text = Text("CD", font_size=14).move_to(d_box.get_center())
-        d_mini = VGroup(d_box, d_text).to_edge(RIGHT*1.7, buff=1.5).shift(UP * 1.5)
+        d_mini = VGroup(d_box, d_text).to_edge(RIGHT*3, buff=1.5).shift(UP * 1.5)
 
         d_desc = VGroup(
             Text("• Circular Doubly", font_size=18, color=GREEN),
             Text("Ins./Elim. (pos. conocida): O(1)", font_size=14),
             Text("Búsqueda / Recorrido: O(n)", font_size=14),
             Text("Bidireccional completo", font_size=14, color=GRAY)
-        ).arrange(DOWN, aligned_edge=LEFT*1.7, buff=0.15).next_to(d_mini, DOWN, buff=0.3)
+        ).arrange(DOWN, aligned_edge=LEFT*3, buff=0.15).next_to(d_mini, DOWN, buff=0.3)
 
         footer_note = Text("* O(1) requiere referencia directa al nodo.", font_size=14, color=GRAY)
         footer_note.to_edge(DOWN)

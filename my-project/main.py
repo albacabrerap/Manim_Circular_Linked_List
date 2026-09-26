@@ -141,3 +141,53 @@ class Introduction(Scene):
 
 
 
+class Credits(Scene):
+
+    def construct(self):
+
+        pellets = VGroup(*[Dot(radius=0.08, color=GOLD).shift(RIGHT * x)for x in range(-5, 6)])
+        self.play(FadeIn(pellets, shift=UP * 0.2))
+
+        pacman_sector = Sector(radius=0.5, start_angle=PI / 4, angle=1.5 * PI, color=YELLOW, fill_opacity=1)
+        pacman_eye = Dot(radius=0.07, color=BLACK).move_to(pacman_sector.get_center() + UP * 0.25 + RIGHT * 0.05)
+        pacman = VGroup(pacman_sector, pacman_eye).move_to(LEFT*6)
+
+
+
+        box = Rectangle(height=9, width=13, color=BLACK, fill_opacity=1, fill_color=BLACK)
+
+        box_text = Text("Elaborado por:", font_size=16, color=YELLOW).move_to(
+            box.get_top() + DOWN*2
+        )
+
+        box_text1 = Text("Ary Sanchez", font_size=16, color=YELLOW).move_to(
+            box.get_top()+DOWN*3
+        )
+        box_text2 = Text("Sebastián Falvy", font_size=16, color=YELLOW).move_to(
+            box.get_top() + DOWN * 4
+        )
+        box_text3 = Text("Alba Cabrera", font_size=16, color=YELLOW).move_to(
+            box.get_top() + DOWN*5
+        )
+
+        cover_box = VGroup(box,box_text, box_text1, box_text2, box_text3)
+        cover_box.move_to(pacman.get_center())
+
+        cover_box.add_updater(lambda m: m.move_to(pacman.get_center()+LEFT*6))
+
+        self.play(FadeIn(cover_box), FadeIn(pacman))
+
+        self.play(
+            pacman.animate.shift(RIGHT * 12), run_time=4, rate_func=linear
+        )
+
+        cover_box.clear_updaters()
+
+        self.play(
+            FadeOut(pacman),
+            FadeOut(pellets),
+        )
+        self.play(FadeOut(cover_box))
+        self.wait(10)
+        self.play(FadeOut(box_text))
+
