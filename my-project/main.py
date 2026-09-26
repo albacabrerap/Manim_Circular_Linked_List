@@ -1,5 +1,4 @@
 from manim import *
-from PIL import Image, ImageFilter
 
 #scene1
 class MusicPlayer(Scene):

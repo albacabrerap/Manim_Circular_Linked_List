@@ -1,3 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Levl4/AEDev/circular-lists/my-project/media/videos/main/480p15/partial_movie_files/CircularLinkedList/2118183852_3611991390_223132457.mp4'
-file 'file:C:/Levl4/AEDev/circular-lists/my-project/media/videos/main/480p15/partial_movie_files/CircularLinkedList/366519484_4046863825_3834236537.mp4'
