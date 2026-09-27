@@ -1,5 +1,5 @@
 # Circular Linked List Demo
-___
+
 En este proyecto se trabajó con la librería Manim para entender mejor el funcionamiento de las listas circularmente enlazadas y desarrollar un video respecto a ello.
 
 > [!NOTE]
