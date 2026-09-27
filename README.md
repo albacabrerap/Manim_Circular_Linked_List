@@ -30,6 +30,6 @@ La característica principal de las listas enlazadas circulares es que todos sus
 ___
 
 **Elaborado por:**
-Ary Sanchez
-Sebastián Falvy
-Alba Cabrera
+Ary Sanchez |
+Sebastián Falvy |
+Alba Cabrera |
